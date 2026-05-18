@@ -21,11 +21,17 @@ define root view entity ZXX_I_SalesReport
     on  DistChanText.DistributionChannel = SalesOrder.DistributionChannel
     and DistChanText.Language            = $session.system_language
 
-  association [0..*] to I_SalesOrderItem         as _SalesOrderItem
-    on _SalesOrderItem.SalesOrder = SalesOrder.SalesOrder
+  // 1:1 join — aggregated per SalesOrder to avoid row multiplication
+  left outer to one join ZXX_I_BillingSummary as Billing
+    on  Billing.SalesOrder = SalesOrder.SalesOrder
+    and Billing.Currency   = SalesOrder.TransactionCurrency
 
-  association [0..*] to I_BillingDocument        as _BillingDocument
-    on _BillingDocument.SDDocument = SalesOrder.SalesOrder
+  // 1:1 join — aggregated per SalesOrder to avoid row multiplication
+  left outer to one join ZXX_I_DeliverySummary as Delivery
+    on Delivery.SalesOrder = SalesOrder.SalesOrder
+
+  association [0..*] to I_SalesOrderItem as _SalesOrderItem
+    on _SalesOrderItem.SalesOrder = SalesOrder.SalesOrder
 
 {
       // ── Dimensions ──────────────────────────────────────────────
@@ -64,23 +70,43 @@ define root view entity ZXX_I_SalesReport
       @DefaultAggregation: #COUNT_DISTINCT
       SalesOrder.SalesOrder                       as SalesOrderCount,
 
-      // ── Measures — Invoice (via association) ────────────────────
+      // ── Measures — Invoice (from ZXX_I_BillingSummary) ──────────
       @Analytics.measure: true
       @DefaultAggregation: #SUM
       @Semantics.amount.currencyCode: 'Currency'
-      SalesOrder.TotalNetAmount - SalesOrder.TotalNetAmount as InvoiceValueNet, -- replaced in projection via association
-
-      // ── Calculated Measures ─────────────────────────────────────
-      @Analytics.measure: true
-      @DefaultAggregation: #SUM
-      cast( 0 as abap.dec(5,2) )                 as FulfilmentPercent,
+      coalesce( Billing.InvoiceValueNet, cast( 0 as abap.curr(23,2) ) ) as InvoiceValueNet,
 
       @Analytics.measure: true
       @DefaultAggregation: #SUM
-      cast( 0 as abap.dec(5,2) )                 as BillingPercent,
+      coalesce( Billing.InvoiceCount, 0 )         as InvoiceCount,
+
+      // ── Measures — Delivery (from ZXX_I_DeliverySummary) ────────
+      @Analytics.measure: true
+      @DefaultAggregation: #SUM
+      coalesce( Delivery.DeliveryCount, 0 )       as DeliveryCount,
+
+      // ── Calculated KPI Measures ──────────────────────────────────
+      // FulfilmentPercent: DeliveryCount / SalesOrderCount * 100
+      @Analytics.measure: true
+      @DefaultAggregation: #SUM
+      cast(
+        case when SalesOrder.TotalNetAmount <> 0
+          then ( coalesce( Billing.InvoiceValueNet, cast( 0 as abap.curr(23,2) ) )
+                 / SalesOrder.TotalNetAmount ) * 100
+          else 0
+        end as abap.dec(5,2)
+      )                                           as BillingPercent,
+
+      @Analytics.measure: true
+      @DefaultAggregation: #SUM
+      cast(
+        case when coalesce( Delivery.DeliveryCount, 0 ) > 0
+          then 100
+          else 0
+        end as abap.dec(5,2)
+      )                                           as FulfilmentPercent,
 
       // ── Associations ────────────────────────────────────────────
-      _SalesOrderItem,
-      _BillingDocument
+      _SalesOrderItem
 
 }
