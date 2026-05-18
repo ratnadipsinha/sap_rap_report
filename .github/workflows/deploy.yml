@@ -1,0 +1,47 @@
+name: Deploy to SAP BTP ABAP
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'           # only triggers when ABAP source files change
+
+jobs:
+  deploy:
+    name: Pull to BTP via abapGit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Fetch CSRF token
+        id: csrf
+        run: |
+          CSRF=$(curl --silent --fail \
+            -u "${{ secrets.BTP_USER }}:${{ secrets.BTP_PASSWORD }}" \
+            -H "X-CSRF-Token: Fetch" \
+            -H "Accept: application/json" \
+            --head \
+            "https://${{ secrets.BTP_HOST }}/sap/bc/adt/abapgit/repos" \
+            | grep -i "x-csrf-token" | awk '{print $2}' | tr -d '\r')
+          echo "token=$CSRF" >> $GITHUB_OUTPUT
+
+      - name: Trigger abapGit Pull on BTP
+        run: |
+          curl --silent --fail \
+            -u "${{ secrets.BTP_USER }}:${{ secrets.BTP_PASSWORD }}" \
+            -X POST \
+            -H "X-CSRF-Token: ${{ steps.csrf.outputs.token }}" \
+            -H "Content-Type: application/json" \
+            -H "Accept: application/json" \
+            -d '{
+              "repoUrl": "https://github.com/ratnadipsinha/SAP_RAP_REPORT.git",
+              "branch": "main",
+              "package": "ZXX_REPORTS"
+            }' \
+            "https://${{ secrets.BTP_HOST }}/sap/bc/adt/abapgit/repos/pull"
+
+      - name: Confirm deployment
+        run: echo "BTP pull triggered successfully — objects syncing to ZXX_REPORTS"
