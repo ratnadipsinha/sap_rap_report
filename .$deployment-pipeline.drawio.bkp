@@ -1,0 +1,298 @@
+<mxfile host="app.diagrams.net" modified="2026-05-16T00:00:00.000Z" agent="Claude" version="21.0.0">
+  <diagram name="Deployment Pipeline" id="dep-pipeline">
+    <mxGraphModel dx="1422" dy="762" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="900" math="0" shadow="0" background="#1a1a2e" sketch="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PHASE 1 CONTAINER                      -->
+        <!-- ═══════════════════════════════════════ -->
+        <mxCell id="p1_container" value="Phase 1 — Develop &amp; Commit"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#252545;strokeColor=#aaaaaa;fontColor=#ffffff;fontSize=14;fontStyle=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;arcSize=3;sketch=1;fontFamily=Architects Daughter;"
+          vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="1614" height="165" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PHASE 2 CONTAINER                      -->
+        <!-- ═══════════════════════════════════════ -->
+        <mxCell id="p2_container" value="Phase 2 — Static Analysis (~2 min)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#252545;strokeColor=#aaaaaa;fontColor=#ffffff;fontSize=14;fontStyle=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;arcSize=3;sketch=1;fontFamily=Architects Daughter;"
+          vertex="1" parent="1">
+          <mxGeometry x="20" y="265" width="750" height="220" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PHASE 3 CONTAINER                      -->
+        <!-- ═══════════════════════════════════════ -->
+        <mxCell id="p3_container" value="Phase 3 — ABAP Unit Tests (~3 min)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#252545;strokeColor=#aaaaaa;fontColor=#ffffff;fontSize=14;fontStyle=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;arcSize=3;sketch=1;fontFamily=Architects Daughter;"
+          vertex="1" parent="1">
+          <mxGeometry x="790" y="265" width="844" height="220" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PHASE 4 CONTAINER                      -->
+        <!-- ═══════════════════════════════════════ -->
+        <mxCell id="p4_container" value="Phase 4 — Deploy to BTP (every merge to main)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#252545;strokeColor=#aaaaaa;fontColor=#ffffff;fontSize=14;fontStyle=1;align=left;verticalAlign=top;spacingLeft=12;spacingTop=10;arcSize=3;sketch=1;fontFamily=Architects Daughter;"
+          vertex="1" parent="1">
+          <mxGeometry x="20" y="500" width="1614" height="235" as="geometry" />
+        </mxCell>
+
+        <!-- BTP Sub-container (inside Phase 4) -->
+        <mxCell id="p4_btp_sub" value="SAP Business Technology Platform"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#001a33;strokeColor=#00b0f0;fontColor=#00b0f0;fontSize=12;fontStyle=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;arcSize=3;sketch=1;fontFamily=Architects Daughter;dashed=1;strokeWidth=2;"
+          vertex="1" parent="1">
+          <mxGeometry x="462" y="513" width="1152" height="198" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PHASE 1 BOXES                          -->
+        <!-- ═══════════════════════════════════════ -->
+        <mxCell id="p1_dev" value="Developer"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ed7d31;fontColor=#1a1a1a;fontSize=13;fontStyle=1;sketch=1;fontFamily=Architects Daughter;strokeWidth=3;"
+          vertex="1" parent="1">
+          <mxGeometry x="58" y="90" width="185" height="72" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p1_eclipse" value="Eclipse ADT"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#5b9bd5;fontColor=#1a1a1a;fontSize=13;sketch=1;fontFamily=Architects Daughter;strokeWidth=3;"
+          vertex="1" parent="1">
+          <mxGeometry x="308" y="90" width="205" height="72" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p1_rap" value="RAP Artifacts&#xa;CDS / BDEF / Impl"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#70ad47;fontColor=#1a1a1a;fontSize=13;sketch=1;fontFamily=Architects Daughter;strokeWidth=3;"
+          vertex="1" parent="1">
+          <mxGeometry x="578" y="90" width="240" height="72" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p1_abapgit" value="abapGit&#xa;git push"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ed7d31;fontColor=#1a1a1a;fontSize=13;sketch=1;fontFamily=Architects Daughter;strokeWidth=3;"
+          vertex="1" parent="1">
+          <mxGeometry x="886" y="90" width="205" height="72" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p1_github" value="GitHub Repository&#xa;Feature Branch → main"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#00b0f0;fontColor=#1a1a1a;fontSize=13;sketch=1;fontFamily=Architects Daughter;strokeWidth=3;"
+          vertex="1" parent="1">
+          <mxGeometry x="1158" y="90" width="255" height="72" as="geometry" />
+        </mxCell>
+
+        <!-- Phase 1 arrows -->
+        <mxCell id="a_p1_1" style="edgeStyle=none;sketch=1;fontFamily=Architects Daughter;strokeColor=#bbbbbb;strokeWidth=2;fillColor=#bbbbbb;" edge="1" source="p1_dev" target="p1_eclipse" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_p1_2" style="edgeStyle=none;sketch=1;fontFamily=Architects Daughter;strokeColor=#bbbbbb;strokeWidth=2;fillColor=#bbbbbb;" edge="1" source="p1_eclipse" target="p1_rap" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_p1_3" style="edgeStyle=none;sketch=1;fontFamily=Architects Daughter;strokeColor=#bbbbbb;strokeWidth=2;fillColor=#bbbbbb;" edge="1" source="p1_rap" target="p1_abapgit" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_p1_4" style="edgeStyle=none;sketch=1;fontFamily=Architects Daughter;strokeColor=#bbbbbb;strokeWidth=2;fillColor=#bbbbbb;" edge="1" source="p1_abapgit" target="p1_github" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- CONCURRENT BANNER                      -->
+        <!-- ═══════════════════════════════════════ -->
+        <mxCell id="concurrent_banner" value="&#8214; Phase 2 &amp; 3 run concurrently &#8214;&#xa;both start right after Phase 1 finishes"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#c07000;fontSize=12;fontStyle=3;sketch=1;fontFamily=Architects Daughter;"
+          vertex="1" parent="1">
+          <mxGeometry x="20" y="198" width="560" height="58" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PHASE 2 BOXES                          -->
+        <!-- ═══════════════════════════════════════ -->
+        <mxCell id="p2_lint" value="abapLint&#xa;(Static Check)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ff6b6b;fontColor=#1a1a1a;fontSize=12;sketch=1;fontFamily=Architects Daughter;strokeWidth=3;"
+          vertex="1" parent="1">
+          <mxGeometry x="48" y="328" width="165" height="72" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p2_atc" value="ATC Check&#xa;(SAP_COM_0748)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ff6b6b;fontColor=#1a1a1a;fontSize=12;sketch=1;fontFamily=Architects Daughter;strokeWidth=3;"
+          vertex="1" parent="1">
+          <mxGeometry x="268" y="328" width="185" height="72" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p2_gate" value="Quality&#xa;Gate"
+          style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ed7d31;fontColor=#1a1a1a;fontSize=12;fontStyle=1;sketch=1;fontFamily=Architects Daughter;strokeWidth=3;"
+          vertex="1" parent="1">
+          <mxGeometry x="510" y="316" width="155" height="98" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p2_fail" value="FAIL → Notify Dev"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe0e0;strokeColor=#ff6b6b;fontColor=#c00000;fontSize=11;sketch=1;fontFamily=Architects Daughter;"
+          vertex="1" parent="1">
+          <mxGeometry x="510" y="440" width="155" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- Phase 2 arrows -->
+        <mxCell id="a_p2_1" style="edgeStyle=none;sketch=1;fontFamily=Architects Daughter;strokeColor=#bbbbbb;strokeWidth=2;" edge="1" source="p2_lint" target="p2_atc" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_p2_2" style="edgeStyle=none;sketch=1;fontFamily=Architects Daughter;strokeColor=#bbbbbb;strokeWidth=2;" edge="1" source="p2_atc" target="p2_gate" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_p2_fail" value="FAIL" style="edgeStyle=orthogonalEdgeStyle;sketch=1;fontFamily=Architects Daughter;strokeColor=#ff6b6b;strokeWidth=2;fontColor=#ff6b6b;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" source="p2_gate" target="p2_fail" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PHASE 3 BOXES                          -->
+        <!-- ═══════════════════════════════════════ -->
+        <mxCell id="p3_ut" value="ABAP Unit Tests&#xa;(SAP_COM_0715)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#00b050;fontColor=#1a1a1a;fontSize=12;sketch=1;fontFamily=Architects Daughter;strokeWidth=3;"
+          vertex="1" parent="1">
+          <mxGeometry x="815" y="328" width="225" height="72" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p3_report" value="Test Report&#xa;Coverage Check"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#00b050;fontColor=#1a1a1a;fontSize=12;sketch=1;fontFamily=Architects Daughter;strokeWidth=3;"
+          vertex="1" parent="1">
+          <mxGeometry x="1100" y="328" width="205" height="72" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p3_gate" value="Coverage&#xa;Gate"
+          style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ed7d31;fontColor=#1a1a1a;fontSize=12;fontStyle=1;sketch=1;fontFamily=Architects Daughter;strokeWidth=3;"
+          vertex="1" parent="1">
+          <mxGeometry x="1370" y="316" width="155" height="98" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p3_fail" value="FAIL → Block Merge"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe0e0;strokeColor=#ff6b6b;fontColor=#c00000;fontSize=11;sketch=1;fontFamily=Architects Daughter;"
+          vertex="1" parent="1">
+          <mxGeometry x="1370" y="440" width="155" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- Phase 3 arrows -->
+        <mxCell id="a_p3_1" style="edgeStyle=none;sketch=1;fontFamily=Architects Daughter;strokeColor=#bbbbbb;strokeWidth=2;" edge="1" source="p3_ut" target="p3_report" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_p3_2" style="edgeStyle=none;sketch=1;fontFamily=Architects Daughter;strokeColor=#bbbbbb;strokeWidth=2;" edge="1" source="p3_report" target="p3_gate" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_p3_fail" value="FAIL" style="edgeStyle=orthogonalEdgeStyle;sketch=1;fontFamily=Architects Daughter;strokeColor=#ff6b6b;strokeWidth=2;fontColor=#ff6b6b;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" source="p3_gate" target="p3_fail" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- PHASE 4 BOXES                          -->
+        <!-- ═══════════════════════════════════════ -->
+        <mxCell id="p4_trigger" value="GitHub Actions&#xa;Triggered"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ed7d31;fontColor=#1a1a1a;fontSize=12;sketch=1;fontFamily=Architects Daughter;strokeWidth=3;"
+          vertex="1" parent="1">
+          <mxGeometry x="48" y="563" width="170" height="72" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p4_abapgit" value="abapGit CLI&#xa;Push to BTP"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#ed7d31;fontColor=#1a1a1a;fontSize=12;sketch=1;fontFamily=Architects Daughter;strokeWidth=3;"
+          vertex="1" parent="1">
+          <mxGeometry x="270" y="563" width="170" height="72" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p4_import" value="ABAP Import Queue&#xa;Activate Objects"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#00b0f0;fontColor=#1a1a1a;fontSize=12;sketch=1;fontFamily=Architects Daughter;strokeWidth=3;"
+          vertex="1" parent="1">
+          <mxGeometry x="492" y="563" width="215" height="72" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p4_binding" value="Service Binding&#xa;Publish OData V4"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7030a0;fontColor=#1a1a1a;fontSize=12;sketch=1;fontFamily=Architects Daughter;strokeWidth=3;"
+          vertex="1" parent="1">
+          <mxGeometry x="762" y="563" width="215" height="72" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p4_html5" value="Fiori App&#xa;HTML5 Deploy"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#7030a0;fontColor=#1a1a1a;fontSize=12;sketch=1;fontFamily=Architects Daughter;strokeWidth=3;"
+          vertex="1" parent="1">
+          <mxGeometry x="1032" y="563" width="205" height="72" as="geometry" />
+        </mxCell>
+
+        <mxCell id="p4_launch" value="Fiori Launchpad&#xa;Live to Users"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#00b050;fontColor=#1a1a1a;fontSize=12;sketch=1;fontFamily=Architects Daughter;strokeWidth=3;"
+          vertex="1" parent="1">
+          <mxGeometry x="1296" y="563" width="205" height="72" as="geometry" />
+        </mxCell>
+
+        <!-- Phase 4 arrows -->
+        <mxCell id="a_p4_1" style="edgeStyle=none;sketch=1;fontFamily=Architects Daughter;strokeColor=#bbbbbb;strokeWidth=2;" edge="1" source="p4_trigger" target="p4_abapgit" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_p4_2" style="edgeStyle=none;sketch=1;fontFamily=Architects Daughter;strokeColor=#bbbbbb;strokeWidth=2;" edge="1" source="p4_abapgit" target="p4_import" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_p4_3" style="edgeStyle=none;sketch=1;fontFamily=Architects Daughter;strokeColor=#bbbbbb;strokeWidth=2;" edge="1" source="p4_import" target="p4_binding" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_p4_4" style="edgeStyle=none;sketch=1;fontFamily=Architects Daughter;strokeColor=#bbbbbb;strokeWidth=2;" edge="1" source="p4_binding" target="p4_html5" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a_p4_5" style="edgeStyle=none;sketch=1;fontFamily=Architects Daughter;strokeColor=#bbbbbb;strokeWidth=2;" edge="1" source="p4_html5" target="p4_launch" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- CROSS-PHASE CONNECTIONS                -->
+        <!-- ═══════════════════════════════════════ -->
+
+        <!-- Phase 1 github → Phase 2 lint (dashed, enters from top) -->
+        <mxCell id="cross_1_2" style="edgeStyle=orthogonalEdgeStyle;sketch=1;fontFamily=Architects Daughter;strokeColor=#888888;dashed=1;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="p1_github" target="p2_lint" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1285" y="230" />
+              <mxPoint x="130" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Phase 1 github → Phase 3 ut (dashed, enters from top) -->
+        <mxCell id="cross_1_3" style="edgeStyle=orthogonalEdgeStyle;sketch=1;fontFamily=Architects Daughter;strokeColor=#888888;dashed=1;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="p1_github" target="p3_ut" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1285" y="230" />
+              <mxPoint x="927" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Phase 2 gate PASS → Phase 4 trigger -->
+        <mxCell id="cross_2_4" value="PASS" style="edgeStyle=orthogonalEdgeStyle;sketch=1;fontFamily=Architects Daughter;strokeColor=#00b050;strokeWidth=2;fontColor=#00b050;fontSize=11;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="p2_gate" target="p4_trigger" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="587" y="480" />
+              <mxPoint x="30" y="480" />
+              <mxPoint x="30" y="599" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Phase 3 gate PASS → Phase 4 trigger -->
+        <mxCell id="cross_3_4" value="PASS" style="edgeStyle=orthogonalEdgeStyle;sketch=1;fontFamily=Architects Daughter;strokeColor=#00b050;strokeWidth=2;fontColor=#00b050;fontSize=11;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="p3_gate" target="p4_trigger" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1447" y="480" />
+              <mxPoint x="1447" y="490" />
+              <mxPoint x="133" y="490" />
+              <mxPoint x="133" y="599" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════ -->
+        <!-- ONE CLICK DEPLOY BANNER                -->
+        <!-- ═══════════════════════════════════════ -->
+        <mxCell id="banner" value="&#9889;  ONE CLICK DEPLOY — git push triggers the entire pipeline automatically"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1f4e79;strokeColor=#00b0f0;fontColor=#ffffff;fontSize=14;fontStyle=1;sketch=1;fontFamily=Architects Daughter;"
+          vertex="1" parent="1">
+          <mxGeometry x="20" y="748" width="1614" height="52" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

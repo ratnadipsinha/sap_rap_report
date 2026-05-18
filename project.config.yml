@@ -1,7 +1,6 @@
 # ═══════════════════════════════════════════════════════════════
 #  SAP RAP PROJECT CONFIGURATION
-#  Central config for all tools: Claude, GitHub Actions, abapGit
-#  DO NOT commit secrets here — use GitHub Secrets for passwords
+#  Central config for all tools: Claude, Eclipse ADT, abapGit
 # ═══════════════════════════════════════════════════════════════
 
 # ───────────────────────────────────────────────────────────────
@@ -14,84 +13,55 @@ project:
   team:        "SAP Development Team"
 
 # ───────────────────────────────────────────────────────────────
-# GITHUB
+# GITHUB  (code storage + version control only)
 # ───────────────────────────────────────────────────────────────
 github:
-  repo:        "ratnadipsinha/sap-rap-report"   # <org-or-user>/<repo-name>
+  repo:        "ratnadipsinha/SAP_RAP_REPORT"
+  url:         "https://github.com/ratnadipsinha/SAP_RAP_REPORT.git"
   branch:
-    main:      "main"                       # production branch — triggers deploy
-    develop:   "develop"                    # integration branch
-    feature:   "feature/*"                  # feature branches (naming pattern)
-  actions:
-    workflow:  ".github/workflows/deploy.yml"
+    main:      "main"                       # stable — Eclipse pulls this to BTP
+    feature:   "feature/*"                  # developer feature branches
 
 # ───────────────────────────────────────────────────────────────
-# SAP BTP — ABAP ENVIRONMENT
-# ───────────────────────────────────────────────────────────────
-btp:
-  host:        "https://REPLACE_WITH_YOUR_BTP_HOST.abap.eu10.hana.ondemand.com"
-  client:      "100"
-  region:      "eu10"                       # e.g. eu10, us10, ap10
-  environment: "ABAP Environment"
-
-  # Communication users (created in BTP Communication Management)
-  # Passwords stored in GitHub Secrets — never here
-  communication:
-    atc_user:   "REPLACE_WITH_ATC_COM_USER"         # linked to SAP_COM_0748
-    test_user:  "REPLACE_WITH_TEST_COM_USER"         # linked to SAP_COM_0715
-    deploy_user: "REPLACE_WITH_DEPLOY_COM_USER"      # linked to ADT REST / abapGit
-
-  # Communication scenarios activated on BTP
-  scenarios:
-    atc:        "SAP_COM_0748"              # ATC checks via REST
-    unit_tests: "SAP_COM_0715"             # ABAP Unit Tests via REST
-    adt:        "SAP_COM_0076"             # ADT REST API (abapGit pull)
-
-# ───────────────────────────────────────────────────────────────
-# SAP DEV SYSTEM (Eclipse ADT — for local activation)
+# SAP DEV SYSTEM  (Eclipse ADT connects here)
 # ───────────────────────────────────────────────────────────────
 dev_system:
-  host:        "https://REPLACE_WITH_DEV_SYSTEM_HOST"
+  host:        "REPLACE_WITH_DEV_SYSTEM_HOST"
   client:      "100"
-  description: "SAP BTP Dev tenant — Eclipse ADT connects here via abapGit"
+  description: "SAP BTP ABAP Environment — Eclipse ADT connects here"
+
+# ───────────────────────────────────────────────────────────────
+# ABAPGIT  (Eclipse plugin — bridges GitHub and SAP system)
+# ───────────────────────────────────────────────────────────────
+abapgit:
+  repo_url:    "https://github.com/ratnadipsinha/SAP_RAP_REPORT.git"
+  branch:      "main"
+  src_folder:  "/src"                       # abapGit reads/writes ABAP objects here
+  package:     "ZXX_REPORTS"
+  transport:   "REPLACE_WITH_TRANSPORT_REQUEST"
+
+# ───────────────────────────────────────────────────────────────
+# ATC  (runs inside Eclipse ADT — no REST / no GitHub secrets)
+# ───────────────────────────────────────────────────────────────
+atc:
+  tool:          "Eclipse ADT"              # NOT GitHub Actions
+  check_variant: "ABAP_CLOUD"              # standard cloud readiness check
+  custom_variant: "ZXX_CLEAN_CORE"         # your custom check variant (optional)
+  trigger:       "automatic"               # auto-runs before every transport/push
+  setup: >
+    Eclipse → Window → Preferences →
+    ABAP Development → ATC →
+    Check variant: ABAP_CLOUD →
+    Enable: Run ATC before transport release
 
 # ───────────────────────────────────────────────────────────────
 # ABAP PACKAGE STRUCTURE
 # ───────────────────────────────────────────────────────────────
 packages:
-  root:        "ZXX"                        # root package (no transport)
-  reports:     "ZXX_REPORTS"               # all report BOs
-  sales:       "ZXX_SALES_REPORT"          # Sales Cycle Report
-  foundation:  "ZXX_FOUNDATION"            # shared helpers, interfaces
-
-# ───────────────────────────────────────────────────────────────
-# ABAPGIT
-# ───────────────────────────────────────────────────────────────
-abapgit:
-  repo_url:    "https://github.com/ratnadipsinha/sap-rap-report.git"
-  branch:      "main"
-  src_folder:  "/src"                       # abapGit serialises objects here
-  package:     "ZXX_REPORTS"
-  transport:   "REPLACE_WITH_TRANSPORT_REQUEST"   # e.g. ZXX K900123
-
-# ───────────────────────────────────────────────────────────────
-# ATC QUALITY GATE
-# ───────────────────────────────────────────────────────────────
-atc:
-  check_variant:    "ABAP_CLOUD"            # standard cloud readiness check
-  custom_variant:   "ZXX_CLEAN_CORE"        # your custom check variant (optional)
-  max_findings:     0                       # pipeline fails if findings > this
-  severity_gate:    "error"                 # block on: error | warning | info
-  endpoint:         "/sap/bc/adt/atc/runs"
-
-# ───────────────────────────────────────────────────────────────
-# UNIT TESTS
-# ───────────────────────────────────────────────────────────────
-unit_tests:
-  scope:       "own_tests"                  # own_tests | foreign_tests | all
-  risk_level:  "harmless"                   # harmless | dangerous | critical
-  duration:    "short"                      # short | medium | long
-  endpoint:    "/sap/bc/adt/abapunit/runs"
+  root:        "ZXX"
+  reports:     "ZXX_REPORTS"
+  sales:       "ZXX_SALES_REPORT"
+  foundation:  "ZXX_FOUNDATION"
 
 # ───────────────────────────────────────────────────────────────
 # SERVICES — OData Bindings
@@ -101,10 +71,10 @@ services:
     service_definition: "ZXX_UI_SalesReport_O4"
     service_binding:    "ZXX_UI_SalesReport_O4"
     binding_type:       "OData V4 - UI"
-    fiori_app_id:       "REPLACE_WITH_FIORI_APP_ID"   # from Fiori Launchpad config
+    fiori_app_id:       "REPLACE_WITH_FIORI_APP_ID"
 
 # ───────────────────────────────────────────────────────────────
-# NAMING CONVENTION (enforced by SAP-NAMING-CONVENTION skill)
+# NAMING CONVENTION
 # ───────────────────────────────────────────────────────────────
 naming:
   prefix:             "ZXX_"
@@ -120,26 +90,26 @@ naming:
   atc_check:          "ZXX_ATC_"
 
 # ───────────────────────────────────────────────────────────────
-# SKILLS — referenced by CLAUDE.md
+# SKILLS
 # ───────────────────────────────────────────────────────────────
 skills:
   - name:   "SAP-NAMING-CONVENTION"
-    file:   "skills/SAP-NAMING-CONVENTION.md"
+    file:   "Skills/SAP-NAMING-CONVENTION.md"
     step:   1
     invoke: "/sap-naming-convention"
 
   - name:   "SAP-FIORI-DESIGNER"
-    file:   "skills/SAP-FIORI-DESIGNER.md"
+    file:   "Skills/SAP-FIORI-DESIGNER.md"
     step:   2
     invoke: "/sap-fiori-designer"
 
   - name:   "SAP-RAP-DEVELOPER"
-    file:   "skills/SAP-RAP-DEVELOPER.md"
+    file:   "Skills/SAP-RAP-DEVELOPER.md"
     step:   3
     invoke: "/sap-rap-developer"
 
   - name:   "SAP-CLEAN-CORE"
-    file:   "skills/SAP-CLEAN-CORE.md"
+    file:   "Skills/SAP-CLEAN-CORE.md"
     step:   4
     invoke: "/sap-clean-core"
 
@@ -147,9 +117,8 @@ skills:
 # FOLDER STRUCTURE
 # ───────────────────────────────────────────────────────────────
 folders:
-  src:          "src/"           # generated ABAP source files
-  skills:       "skills/"        # Claude skill files
-  docs:         "docs/"          # proposals, guides, mockups
-  diagrams:     "diagrams/"      # draw.io pipeline diagrams
-  requirements: "requirements/"  # business requirements (.md files)
-  workflows:    ".github/workflows/"
+  src:          "src/"
+  skills:       "Skills/"
+  docs:         "docs/"
+  diagrams:     "diagrams/"
+  requirements: "requirements/"

@@ -91,40 +91,33 @@ See full reference: [skills/SAP-CLEAN-CORE.md](skills/SAP-CLEAN-CORE.md)
 
 ---
 
-## CI/CD Pipeline
+## Pipeline Flow
 
 ```
-Claude generates code → src/ folder
+Claude generates code → writes to src/ folder
       ↓
-Push to GitHub branch
+Push to GitHub (feature branch)
       ↓
-Eclipse ADT pulls from GitHub via abapGit → activate in SAP Dev system
+Eclipse ADT pulls from GitHub via abapGit plugin
       ↓
-PR merged to main → GitHub Actions triggers automatically
+ATC runs automatically in Eclipse (check variant: ABAP_CLOUD)
+  FAIL → fix in Claude → push again
+  PASS → developer activates objects in SAP system
       ↓
-JOB 1: ATC via REST (SAP_COM_0748) — check variant: ABAP_CLOUD
-        Gate: zero error findings → else pipeline fails
+PR merged to main on GitHub
       ↓
-JOB 2: ABAP Unit Tests via REST (SAP_COM_0715)
-        Gate: all tests green → else pipeline fails
+Eclipse pulls main branch → abapGit syncs to BTP
       ↓
-JOB 3: abapGit Pull on SAP BTP (ADT REST → /sap/bc/adt/abapgit/repos)
-        Automatically pulls main branch into BTP tenant
-      ↓
-Fiori app live on OData V4 — no manual steps
+Fiori app live on OData V4
 ```
 
-**GitHub Actions workflow:** [.github/workflows/deploy.yml](.github/workflows/deploy.yml)
+**GitHub = code storage + version control only. No secrets. No Actions.**
 
-**GitHub Secrets required (set in repo Settings → Secrets):**
-- `BTP_HOST` — e.g. `https://xxxx.abap.eu10.hana.ondemand.com`
-- `BTP_USER` — communication user (linked to SAP_COM_0748 + SAP_COM_0715)
-- `BTP_PASS` — communication user password
+**ATC setup in Eclipse:**
+`Window → Preferences → ABAP Development → ATC → check variant: ABAP_CLOUD → Enable: Run ATC before transport`
 
-**Communication scenarios on BTP:**
-- `SAP_COM_0748` — ATC via REST (Job 1)
-- `SAP_COM_0715` — ABAP Unit Tests via REST (Job 2)
-- ADT REST API — abapGit pull (Job 3, same user)
+**abapGit setup in Eclipse:**
+`abapGit plugin → Clone → paste GitHub repo URL → link to package ZXX_REPORTS`
 
 See pipeline diagram: [diagrams/deployment-pipeline.drawio](diagrams/deployment-pipeline.drawio)
 
