@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sales Report — Fiori ALP Mockup</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: '72', 'Helvetica Neue', Arial, sans-serif; background: #f5f6f7; font-size: 13px; color: #32363a; }
+
+  /* SHELL BAR */
+  .shell { background: #0a6ed1; color: #fff; height: 44px; display: flex; align-items: center; padding: 0 16px; gap: 16px; }
+  .shell-logo { font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+  .shell-title { font-size: 14px; opacity: .85; }
+  .shell-user { margin-left: auto; font-size: 12px; opacity: .8; }
+
+  /* PAGE HEADER */
+  .page-header { background: #fff; padding: 12px 24px 0; border-bottom: 1px solid #e5e5e5; }
+  .page-title { font-size: 20px; font-weight: 600; color: #32363a; margin-bottom: 12px; }
+
+  /* FILTER BAR */
+  .filter-bar { background: #fff; padding: 12px 24px; border-bottom: 1px solid #d9d9d9; display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; }
+  .filter-group { display: flex; flex-direction: column; gap: 4px; }
+  .filter-label { font-size: 11px; color: #6a6d70; font-weight: 500; }
+  .filter-input { border: 1px solid #89919a; border-radius: 4px; padding: 5px 8px; font-size: 12px; width: 140px; background: #fff; color: #32363a; }
+  .filter-input:focus { outline: none; border-color: #0a6ed1; }
+  .btn-go { background: #0a6ed1; color: #fff; border: none; border-radius: 4px; padding: 6px 20px; font-size: 13px; cursor: pointer; font-weight: 600; }
+  .btn-adapt { background: #fff; color: #0a6ed1; border: 1px solid #0a6ed1; border-radius: 4px; padding: 6px 14px; font-size: 12px; cursor: pointer; }
+
+  /* KPI STRIP */
+  .kpi-strip { display: flex; gap: 12px; padding: 16px 24px; background: #fff; border-bottom: 1px solid #e5e5e5; }
+  .kpi-card { border: 1px solid #e5e5e5; border-radius: 6px; padding: 12px 20px; min-width: 160px; background: #fff; }
+  .kpi-label { font-size: 11px; color: #6a6d70; margin-bottom: 4px; }
+  .kpi-value { font-size: 22px; font-weight: 600; }
+  .kpi-trend { font-size: 11px; margin-top: 4px; }
+  .kpi-green { color: #107e3e; }
+  .kpi-red { color: #bb0000; }
+  .kpi-yellow { color: #e9730c; }
+  .kpi-blue { color: #0a6ed1; }
+
+  /* CHARTS ROW */
+  .charts-row { display: flex; gap: 16px; padding: 16px 24px; background: #f5f6f7; }
+  .chart-card { background: #fff; border: 1px solid #e5e5e5; border-radius: 6px; padding: 16px; flex: 1; }
+  .chart-title { font-size: 13px; font-weight: 600; color: #32363a; margin-bottom: 16px; border-bottom: 1px solid #f0f0f0; padding-bottom: 8px; }
+
+  /* DONUT CHART */
+  .donut-wrap { display: flex; align-items: center; gap: 24px; }
+  .donut-svg { flex-shrink: 0; }
+  .legend { display: flex; flex-direction: column; gap: 8px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .legend-pct { font-weight: 600; margin-left: auto; min-width: 36px; text-align: right; }
+
+  /* BAR CHART */
+  .bar-chart { display: flex; align-items: flex-end; gap: 6px; height: 160px; padding-top: 8px; position: relative; }
+  .bar-group { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .bars { display: flex; gap: 3px; align-items: flex-end; }
+  .bar { width: 22px; border-radius: 3px 3px 0 0; position: relative; cursor: pointer; transition: opacity .2s; }
+  .bar:hover { opacity: .8; }
+  .bar-order { background: #5899da; }
+  .bar-invoice { background: #19a979; }
+  .bar-label { font-size: 10px; color: #6a6d70; text-align: center; margin-top: 4px; white-space: nowrap; }
+  .bar-company { font-size: 10px; font-weight: 600; color: #32363a; text-align: center; margin-top: 6px; border-top: 2px solid #d9d9d9; padding-top: 4px; width: 100%; }
+  .bar-value { position: absolute; top: -16px; left: 50%; transform: translateX(-50%); font-size: 9px; color: #6a6d70; white-space: nowrap; }
+  .chart-legend { display: flex; gap: 16px; margin-top: 12px; justify-content: center; }
+  .chart-legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; }
+  .chart-legend-box { width: 12px; height: 12px; border-radius: 2px; }
+  .y-axis { position: absolute; left: 0; top: 0; bottom: 20px; width: 36px; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-end; }
+  .y-label { font-size: 9px; color: #89919a; }
+  .bar-chart-wrap { position: relative; padding-left: 40px; }
+
+  /* SUMMARY TABLE */
+  .table-section { padding: 16px 24px 24px; }
+  .table-toolbar { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .table-title { font-size: 14px; font-weight: 600; }
+  .table-count { font-size: 12px; color: #6a6d70; }
+  .btn-excel { margin-left: auto; background: #fff; border: 1px solid #89919a; border-radius: 4px; padding: 5px 12px; font-size: 11px; cursor: pointer; color: #32363a; }
+  table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #e5e5e5; border-radius: 6px; overflow: hidden; font-size: 12px; }
+  thead th { background: #f5f6f7; padding: 8px 12px; text-align: left; font-weight: 600; font-size: 11px; color: #6a6d70; border-bottom: 2px solid #e5e5e5; white-space: nowrap; }
+  thead th.num { text-align: right; }
+  tbody td { padding: 7px 12px; border-bottom: 1px solid #f0f0f0; }
+  tbody td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .row-group1 { background: #e8f1fb; font-weight: 700; }
+  .row-group2 { background: #f5f9ff; font-weight: 600; }
+  .row-detail { background: #fff; }
+  .row-detail:hover { background: #f5f6f7; }
+  .row-subtotal { background: #fafafa; font-weight: 600; font-style: italic; color: #6a6d70; border-top: 1px solid #d9d9d9; }
+  .row-grandtotal { background: #0a6ed1; color: #fff; font-weight: 700; }
+  .row-grandtotal td { color: #fff; }
+  .expand-icon { cursor: pointer; margin-right: 6px; font-size: 10px; color: #0a6ed1; }
+  .indent1 { padding-left: 28px !important; }
+  .indent2 { padding-left: 48px !important; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; }
+  .badge-green { background: #e8f5e9; color: #107e3e; }
+  .badge-yellow { background: #fff3e0; color: #e9730c; }
+  .badge-red { background: #fce8e8; color: #bb0000; }
+  .pct-green { color: #107e3e; font-weight: 600; }
+  .pct-yellow { color: #e9730c; font-weight: 600; }
+  .pct-red { color: #bb0000; font-weight: 600; }
+
+  .section-divider { height: 1px; background: #e5e5e5; margin: 0 24px; }
+</style>
+</head>
+<body>
+
+<!-- SHELL BAR -->
+<div class="shell">
+  <div class="shell-logo">SAP</div>
+  <div class="shell-title">Sales Cycle Report</div>
+  <div class="shell-user">John Miller &nbsp;|&nbsp; Sales Controller</div>
+</div>
+
+<!-- PAGE HEADER + FILTER BAR -->
+<div class="page-header">
+  <div class="page-title">Sales Cycle Report — Order to Invoice</div>
+</div>
+<div class="filter-bar">
+  <div class="filter-group">
+    <div class="filter-label">Company Code</div>
+    <input class="filter-input" value="1000, 2000" />
+  </div>
+  <div class="filter-group">
+    <div class="filter-label">Sales Organisation</div>
+    <input class="filter-input" value="IN01, IN02, IN03" />
+  </div>
+  <div class="filter-group">
+    <div class="filter-label">Distribution Channel</div>
+    <input class="filter-input" value="10, 20" />
+  </div>
+  <div class="filter-group">
+    <div class="filter-label">Creation Date (From)</div>
+    <input class="filter-input" value="01.01.2025" />
+  </div>
+  <div class="filter-group">
+    <div class="filter-label">Creation Date (To)</div>
+    <input class="filter-input" value="17.05.2025" />
+  </div>
+  <button class="btn-go">Go</button>
+  <button class="btn-adapt">Adapt Filters</button>
+</div>
+
+<!-- KPI STRIP -->
+<div class="kpi-strip">
+  <div class="kpi-card">
+    <div class="kpi-label">Total Sales Orders</div>
+    <div class="kpi-value kpi-blue">3,842</div>
+    <div class="kpi-trend kpi-blue">▲ 12% vs last period</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">Total Order Value</div>
+    <div class="kpi-value kpi-blue">€ 18.4M</div>
+    <div class="kpi-trend kpi-blue">▲ 8% vs last period</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">Total Invoice Value</div>
+    <div class="kpi-value kpi-green">€ 15.9M</div>
+    <div class="kpi-trend kpi-green">86% of order value ✓</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">Overall Fulfilment %</div>
+    <div class="kpi-value kpi-yellow">78%</div>
+    <div class="kpi-trend kpi-yellow">⚠ Below target (90%)</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">Overall Billing %</div>
+    <div class="kpi-value kpi-green">86%</div>
+    <div class="kpi-trend kpi-green">▲ On track</div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- CHARTS ROW -->
+<div class="charts-row">
+
+  <!-- DONUT CHART -->
+  <div class="chart-card" style="max-width:380px;">
+    <div class="chart-title">Invoice Value by Sales Organisation</div>
+    <div class="donut-wrap">
+      <svg class="donut-svg" width="160" height="160" viewBox="0 0 160 160">
+        <!-- Donut segments (stroke-dasharray trick) -->
+        <circle cx="80" cy="80" r="60" fill="none" stroke="#e5e5e5" stroke-width="28"/>
+        <!-- IN01: 38% = 226.2deg -->
+        <circle cx="80" cy="80" r="60" fill="none" stroke="#0a6ed1" stroke-width="28"
+          stroke-dasharray="143 234" stroke-dashoffset="0" transform="rotate(-90 80 80)"/>
+        <!-- IN02: 27% = 160.7deg -->
+        <circle cx="80" cy="80" r="60" fill="none" stroke="#19a979" stroke-width="28"
+          stroke-dasharray="101 276" stroke-dashoffset="-143" transform="rotate(-90 80 80)"/>
+        <!-- IN03: 20% = 119.1deg -->
+        <circle cx="80" cy="80" r="60" fill="none" stroke="#e9730c" stroke-width="28"
+          stroke-dasharray="75 302" stroke-dashoffset="-244" transform="rotate(-90 80 80)"/>
+        <!-- IN04: 15% = 89.3deg -->
+        <circle cx="80" cy="80" r="60" fill="none" stroke="#bb0000" stroke-width="28"
+          stroke-dasharray="56 321" stroke-dashoffset="-319" transform="rotate(-90 80 80)"/>
+        <text x="80" y="75" text-anchor="middle" font-size="14" font-weight="700" fill="#32363a">€15.9M</text>
+        <text x="80" y="92" text-anchor="middle" font-size="10" fill="#6a6d70">Invoice Total</text>
+      </svg>
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#0a6ed1"></div>
+          <div>IN01 — India North</div>
+          <div class="legend-pct" style="color:#0a6ed1">38%</div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#19a979"></div>
+          <div>IN02 — India South</div>
+          <div class="legend-pct" style="color:#19a979">27%</div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#e9730c"></div>
+          <div>IN03 — India West</div>
+          <div class="legend-pct" style="color:#e9730c">20%</div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#bb0000"></div>
+          <div>IN04 — India East</div>
+          <div class="legend-pct" style="color:#bb0000">15%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUPED BAR CHART -->
+  <div class="chart-card">
+    <div class="chart-title">Order Value vs Invoice Value by Sales Org — grouped by Company Code</div>
+    <div class="bar-chart-wrap">
+      <div class="y-axis">
+        <div class="y-label">8M</div>
+        <div class="y-label">6M</div>
+        <div class="y-label">4M</div>
+        <div class="y-label">2M</div>
+        <div class="y-label">0</div>
+      </div>
+      <div class="bar-chart">
+        <!-- Company 1000 -->
+        <div class="bar-group">
+          <div class="bars">
+            <div style="display:flex;flex-direction:column;align-items:center">
+              <div class="bar bar-order" style="height:95px;" title="Order: €6.1M">
+                <div class="bar-value">6.1M</div>
+              </div>
+              <div class="bar-label">IN01</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center">
+              <div class="bar bar-invoice" style="height:80px;" title="Invoice: €5.1M">
+                <div class="bar-value">5.1M</div>
+              </div>
+              <div class="bar-label">IN01</div>
+            </div>
+            &nbsp;&nbsp;
+            <div style="display:flex;flex-direction:column;align-items:center">
+              <div class="bar bar-order" style="height:65px;" title="Order: €4.2M">
+                <div class="bar-value">4.2M</div>
+              </div>
+              <div class="bar-label">IN02</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center">
+              <div class="bar bar-invoice" style="height:56px;" title="Invoice: €3.6M">
+                <div class="bar-value">3.6M</div>
+              </div>
+              <div class="bar-label">IN02</div>
+            </div>
+          </div>
+          <div class="bar-company">1000 · India Corp</div>
+        </div>
+
+        <div style="width:20px;"></div>
+
+        <!-- Company 2000 -->
+        <div class="bar-group">
+          <div class="bars">
+            <div style="display:flex;flex-direction:column;align-items:center">
+              <div class="bar bar-order" style="height:50px;" title="Order: €3.2M">
+                <div class="bar-value">3.2M</div>
+              </div>
+              <div class="bar-label">IN03</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center">
+              <div class="bar bar-invoice" style="height:40px;" title="Invoice: €2.6M">
+                <div class="bar-value">2.6M</div>
+              </div>
+              <div class="bar-label">IN03</div>
+            </div>
+            &nbsp;&nbsp;
+            <div style="display:flex;flex-direction:column;align-items:center">
+              <div class="bar bar-order" style="height:38px;" title="Order: €2.4M">
+                <div class="bar-value">2.4M</div>
+              </div>
+              <div class="bar-label">IN04</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center">
+              <div class="bar bar-invoice" style="height:30px;" title="Invoice: €1.9M">
+                <div class="bar-value">1.9M</div>
+              </div>
+              <div class="bar-label">IN04</div>
+            </div>
+          </div>
+          <div class="bar-company">2000 · India West Ltd</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="chart-legend">
+      <div class="chart-legend-item"><div class="chart-legend-box" style="background:#5899da"></div> Order Value (Net)</div>
+      <div class="chart-legend-item"><div class="chart-legend-box" style="background:#19a979"></div> Invoice Value (Net)</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SUMMARY TABLE -->
+<div class="table-section">
+  <div class="table-toolbar">
+    <div class="table-title">Sales Cycle Summary</div>
+    <div class="table-count">(12 rows)</div>
+    <button class="btn-excel">⬇ Export to Excel</button>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Company / Sales Org / Channel</th>
+        <th class="num">Orders</th>
+        <th class="num">Order Value (€)</th>
+        <th class="num">Deliveries</th>
+        <th class="num">Delivered Qty</th>
+        <th class="num">Invoices</th>
+        <th class="num">Invoice Value (€)</th>
+        <th class="num">Fulfilment %</th>
+        <th class="num">Billing %</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Company 1000 -->
+      <tr class="row-group1">
+        <td><span class="expand-icon">▼</span><strong>1000 — India Corp</strong></td>
+        <td class="num">2,640</td>
+        <td class="num">10,300,000</td>
+        <td class="num">2,410</td>
+        <td class="num">98,400</td>
+        <td class="num">2,180</td>
+        <td class="num">8,700,000</td>
+        <td class="num"><span class="pct-yellow">81%</span></td>
+        <td class="num"><span class="pct-green">84%</span></td>
+      </tr>
+      <!-- Sales Org IN01 -->
+      <tr class="row-group2">
+        <td class="indent1"><span class="expand-icon">▼</span>IN01 — India North</td>
+        <td class="num">1,540</td>
+        <td class="num">6,100,000</td>
+        <td class="num">1,420</td>
+        <td class="num">58,200</td>
+        <td class="num">1,310</td>
+        <td class="num">5,100,000</td>
+        <td class="num"><span class="pct-yellow">84%</span></td>
+        <td class="num"><span class="pct-green">84%</span></td>
+      </tr>
+      <tr class="row-detail">
+        <td class="indent2">10 — Direct Sales</td>
+        <td class="num">920</td>
+        <td class="num">3,800,000</td>
+        <td class="num">860</td>
+        <td class="num">35,400</td>
+        <td class="num">800</td>
+        <td class="num">3,200,000</td>
+        <td class="num"><span class="pct-green">91%</span></td>
+        <td class="num"><span class="pct-green">84%</span></td>
+      </tr>
+      <tr class="row-detail">
+        <td class="indent2">20 — Retail</td>
+        <td class="num">620</td>
+        <td class="num">2,300,000</td>
+        <td class="num">560</td>
+        <td class="num">22,800</td>
+        <td class="num">510</td>
+        <td class="num">1,900,000</td>
+        <td class="num"><span class="pct-yellow">76%</span></td>
+        <td class="num"><span class="pct-yellow">83%</span></td>
+      </tr>
+      <!-- Sales Org IN02 -->
+      <tr class="row-group2">
+        <td class="indent1"><span class="expand-icon">▼</span>IN02 — India South</td>
+        <td class="num">1,100</td>
+        <td class="num">4,200,000</td>
+        <td class="num">990</td>
+        <td class="num">40,200</td>
+        <td class="num">870</td>
+        <td class="num">3,600,000</td>
+        <td class="num"><span class="pct-yellow">78%</span></td>
+        <td class="num"><span class="pct-green">86%</span></td>
+      </tr>
+      <tr class="row-detail">
+        <td class="indent2">10 — Direct Sales</td>
+        <td class="num">700</td>
+        <td class="num">2,700,000</td>
+        <td class="num">640</td>
+        <td class="num">26,000</td>
+        <td class="num">580</td>
+        <td class="num">2,300,000</td>
+        <td class="num"><span class="pct-green">91%</span></td>
+        <td class="num"><span class="pct-green">85%</span></td>
+      </tr>
+      <tr class="row-detail">
+        <td class="indent2">20 — Retail</td>
+        <td class="num">400</td>
+        <td class="num">1,500,000</td>
+        <td class="num">350</td>
+        <td class="num">14,200</td>
+        <td class="num">290</td>
+        <td class="num">1,300,000</td>
+        <td class="num"><span class="pct-red">61%</span></td>
+        <td class="num"><span class="pct-yellow">87%</span></td>
+      </tr>
+
+      <!-- Company 2000 -->
+      <tr class="row-group1">
+        <td><span class="expand-icon">▼</span><strong>2000 — India West Ltd</strong></td>
+        <td class="num">1,202</td>
+        <td class="num">5,600,000</td>
+        <td class="num">980</td>
+        <td class="num">39,800</td>
+        <td class="num">870</td>
+        <td class="num">4,500,000</td>
+        <td class="num"><span class="pct-red">68%</span></td>
+        <td class="num"><span class="pct-green">80%</span></td>
+      </tr>
+      <tr class="row-group2">
+        <td class="indent1"><span class="expand-icon">▼</span>IN03 — India West</td>
+        <td class="num">680</td>
+        <td class="num">3,200,000</td>
+        <td class="num">560</td>
+        <td class="num">22,600</td>
+        <td class="num">490</td>
+        <td class="num">2,600,000</td>
+        <td class="num"><span class="pct-red">67%</span></td>
+        <td class="num"><span class="pct-yellow">81%</span></td>
+      </tr>
+      <tr class="row-detail">
+        <td class="indent2">10 — Direct Sales</td>
+        <td class="num">680</td>
+        <td class="num">3,200,000</td>
+        <td class="num">560</td>
+        <td class="num">22,600</td>
+        <td class="num">490</td>
+        <td class="num">2,600,000</td>
+        <td class="num"><span class="pct-red">67%</span></td>
+        <td class="num"><span class="pct-yellow">81%</span></td>
+      </tr>
+      <tr class="row-group2">
+        <td class="indent1"><span class="expand-icon">▼</span>IN04 — India East</td>
+        <td class="num">522</td>
+        <td class="num">2,400,000</td>
+        <td class="num">420</td>
+        <td class="num">17,200</td>
+        <td class="num">380</td>
+        <td class="num">1,900,000</td>
+        <td class="num"><span class="pct-red">69%</span></td>
+        <td class="num"><span class="pct-yellow">79%</span></td>
+      </tr>
+      <tr class="row-detail">
+        <td class="indent2">20 — Retail</td>
+        <td class="num">522</td>
+        <td class="num">2,400,000</td>
+        <td class="num">420</td>
+        <td class="num">17,200</td>
+        <td class="num">380</td>
+        <td class="num">1,900,000</td>
+        <td class="num"><span class="pct-red">69%</span></td>
+        <td class="num"><span class="pct-yellow">79%</span></td>
+      </tr>
+
+      <!-- GRAND TOTAL -->
+      <tr class="row-grandtotal">
+        <td><strong>Grand Total</strong></td>
+        <td class="num"><strong>3,842</strong></td>
+        <td class="num"><strong>18,400,000</strong></td>
+        <td class="num"><strong>3,390</strong></td>
+        <td class="num"><strong>138,200</strong></td>
+        <td class="num"><strong>3,050</strong></td>
+        <td class="num"><strong>15,900,000</strong></td>
+        <td class="num"><strong>78%</strong></td>
+        <td class="num"><strong>86%</strong></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

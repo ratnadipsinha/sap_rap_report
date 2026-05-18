@@ -1,0 +1,176 @@
+<mxfile host="app.diagrams.net" version="21.0.0">
+  <diagram name="RAP Deployment" id="rap-deploy">
+    <mxGraphModel dx="1422" dy="762" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="480" math="0" shadow="0" background="#f8fafc">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TITLE -->
+        <mxCell id="title" value="ONE-CLICK SAP RAP DEPLOY PIPELINE" style="text;html=1;fillColor=none;strokeColor=none;fontColor=#0f172a;fontSize=26;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="0" y="10" width="1440" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="sub" value="From AI-generated ABAP code to live Fiori app — automated with GitHub Actions &amp; SAP BTP" style="text;html=1;fillColor=none;strokeColor=none;fontColor=#64748b;fontSize=12;fontStyle=2;align=center;" vertex="1" parent="1">
+          <mxGeometry x="0" y="44" width="1440" height="16" as="geometry" />
+        </mxCell>
+
+        <!-- TECH PILLS (centered, y=66) -->
+        <mxCell id="tp1" value="CLAUDE CODE" style="rounded=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#92400e;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="365" y="66" width="106" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="tp2" value="ABAP RAP" style="rounded=1;fillColor=#ede9fe;strokeColor=#7c3aed;fontColor=#4c1d95;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="479" y="66" width="86" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="tp3" value="ECLIPSE ADT" style="rounded=1;fillColor=#ede9fe;strokeColor=#7c3aed;fontColor=#4c1d95;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="573" y="66" width="96" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="tp4" value="GITHUB ACTIONS" style="rounded=1;fillColor=#f1f5f9;strokeColor=#475569;fontColor=#1e293b;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="677" y="66" width="116" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="tp5" value="SAP BTP" style="rounded=1;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#1e3a8a;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="801" y="66" width="76" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="tp6" value="OData V4" style="rounded=1;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#1e3a8a;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="885" y="66" width="76" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="tp7" value="Fiori Elements" style="rounded=1;fillColor=#ccfbf1;strokeColor=#0d9488;fontColor=#134e4a;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="969" y="66" width="106" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!-- CARD 1 — CLAUDE CODE  (x=20, y=92, w=248, h=180)         -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <mxCell id="c1bg" value="" style="rounded=1;fillColor=#ffffff;strokeColor=#e2e8f0;strokeWidth=1;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="92" width="248" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="c1h" value="01  ·  CLAUDE CODE" style="rounded=1;fillColor=#d97706;strokeColor=none;fontColor=#ffffff;fontSize=13;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="20" y="92" width="248" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="c1c" value="&lt;b&gt;AI Code Generator&lt;/b&gt;&lt;br/&gt;▸ Generates CDS Views (ZI_ / ZC_)&lt;br/&gt;▸ Writes BDEF + lhc_ handler class&lt;br/&gt;▸ Saves .abap files to /src folder" style="text;html=1;fillColor=none;strokeColor=none;fontColor=#475569;fontSize=11;align=left;verticalAlign=top;spacingTop=10;spacingLeft=12;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="20" y="128" width="248" height="144" as="geometry" />
+        </mxCell>
+
+        <!-- ARROW 1→2 -->
+        <mxCell id="a12" value="" style="edgeStyle=none;strokeColor=#94a3b8;strokeWidth=2;endArrow=block;endFill=1;" edge="1" source="c1bg" target="c2bg" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!-- CARD 2 — LOCAL /src REPO  (x=308)                        -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <mxCell id="c2bg" value="" style="rounded=1;fillColor=#ffffff;strokeColor=#e2e8f0;strokeWidth=1;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="308" y="92" width="248" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="c2h" value="02  ·  GITHUB REPO" style="rounded=1;fillColor=#24292e;strokeColor=none;fontColor=#ffffff;fontSize=13;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="308" y="92" width="248" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="c2c" value="&lt;b&gt;Version Control Hub&lt;/b&gt;&lt;br/&gt;▸ Claude pushes .abap + .xml files&lt;br/&gt;▸ Eclipse pulls via abapGit plugin&lt;br/&gt;▸ Full history, team collaboration" style="text;html=1;fillColor=none;strokeColor=none;fontColor=#475569;fontSize=11;align=left;verticalAlign=top;spacingTop=10;spacingLeft=12;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="308" y="128" width="248" height="144" as="geometry" />
+        </mxCell>
+
+        <!-- ARROW 2→3 -->
+        <mxCell id="a23" value="" style="edgeStyle=none;strokeColor=#94a3b8;strokeWidth=2;endArrow=block;endFill=1;" edge="1" source="c2bg" target="c3bg" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!-- CARD 3 — ECLIPSE ADT  (x=596)                            -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <mxCell id="c3bg" value="" style="rounded=1;fillColor=#ffffff;strokeColor=#e2e8f0;strokeWidth=1;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="596" y="92" width="248" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="c3h" value="03  ·  ECLIPSE ADT" style="rounded=1;fillColor=#7c3aed;strokeColor=none;fontColor=#ffffff;fontSize=13;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="596" y="92" width="248" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="c3c" value="&lt;b&gt;ABAP Development Tools&lt;/b&gt;&lt;br/&gt;▸ Pull from GitHub via abapGit&lt;br/&gt;▸ Activate CDS / BDEF in Dev system&lt;br/&gt;▸ Review &amp; test before merge to main" style="text;html=1;fillColor=none;strokeColor=none;fontColor=#475569;fontSize=11;align=left;verticalAlign=top;spacingTop=10;spacingLeft=12;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="596" y="128" width="248" height="144" as="geometry" />
+        </mxCell>
+
+        <!-- ARROW 3→4 -->
+        <mxCell id="a34" value="" style="edgeStyle=none;strokeColor=#94a3b8;strokeWidth=2;endArrow=block;endFill=1;" edge="1" source="c3bg" target="c4bg" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!-- CARD 4 — GITHUB ACTIONS  (x=884)                         -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <mxCell id="c4bg" value="" style="rounded=1;fillColor=#ffffff;strokeColor=#e2e8f0;strokeWidth=1;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="884" y="92" width="248" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="c4h" value="04  ·  GITHUB ACTIONS" style="rounded=1;fillColor=#24292e;strokeColor=none;fontColor=#ffffff;fontSize=13;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="884" y="92" width="248" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="c4c" value="&lt;b&gt;CI/CD Automation&lt;/b&gt;&lt;br/&gt;▸ Triggers on PR merge to main&lt;br/&gt;▸ Lint → ATC via REST → Unit Tests&lt;br/&gt;▸ Gate: zero findings required" style="text;html=1;fillColor=none;strokeColor=none;fontColor=#475569;fontSize=11;align=left;verticalAlign=top;spacingTop=10;spacingLeft=12;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="884" y="128" width="248" height="144" as="geometry" />
+        </mxCell>
+
+        <!-- ARROW 4→5 -->
+        <mxCell id="a45" value="" style="edgeStyle=none;strokeColor=#94a3b8;strokeWidth=2;endArrow=block;endFill=1;" edge="1" source="c4bg" target="c5bg" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!-- CARD 5 — SAP BTP  (x=1172)                               -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <mxCell id="c5bg" value="" style="rounded=1;fillColor=#ffffff;strokeColor=#e2e8f0;strokeWidth=1;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="1172" y="92" width="248" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="c5h" value="05  ·  SAP BTP" style="rounded=1;fillColor=#1d4ed8;strokeColor=none;fontColor=#ffffff;fontSize=13;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1172" y="92" width="248" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="c5c" value="&lt;b&gt;ABAP Environment — Live&lt;/b&gt;&lt;br/&gt;▸ abapGit deploys to BTP tenant&lt;br/&gt;▸ ATC runs via SAP_COM_0748&lt;br/&gt;▸ Fiori app live on OData V4" style="text;html=1;fillColor=none;strokeColor=none;fontColor=#475569;fontSize=11;align=left;verticalAlign=top;spacingTop=10;spacingLeft=12;spacingRight=8;" vertex="1" parent="1">
+          <mxGeometry x="1172" y="128" width="248" height="144" as="geometry" />
+        </mxCell>
+
+        <!-- PHASE LABELS (y=278) -->
+        <mxCell id="pl1" value="Generate" style="text;html=1;fillColor=none;strokeColor=none;fontColor=#d97706;fontSize=11;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="20" y="278" width="248" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="pl2" value="GitHub Repo" style="text;html=1;fillColor=none;strokeColor=none;fontColor=#24292e;fontSize=11;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="308" y="278" width="248" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="pl3" value="Develop" style="text;html=1;fillColor=none;strokeColor=none;fontColor=#7c3aed;fontSize=11;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="596" y="278" width="248" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="pl4" value="CI/CD" style="text;html=1;fillColor=none;strokeColor=none;fontColor=#24292e;fontSize=11;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="884" y="278" width="248" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="pl5" value="Deploy Live" style="text;html=1;fillColor=none;strokeColor=none;fontColor=#1d4ed8;fontSize=11;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1172" y="278" width="248" height="16" as="geometry" />
+        </mxCell>
+
+        <!-- KEY BENEFITS HEADER (y=300) -->
+        <mxCell id="bh" value="KEY BENEFITS" style="rounded=1;fillColor=#0d9488;strokeColor=none;fontColor=#ffffff;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="20" y="300" width="1400" height="26" as="geometry" />
+        </mxCell>
+
+        <!-- BENEFIT CARDS — title + subtitle in one cell (y=332, h=48) -->
+        <mxCell id="b1" value="&lt;b&gt;ONE CLICK DEPLOY&lt;/b&gt;&lt;br/&gt;&lt;font style='font-size:10px;'&gt;Claude to live Fiori in one push&lt;/font&gt;" style="rounded=1;fillColor=#fef3c7;strokeColor=#d97706;fontColor=#92400e;fontSize=12;fontStyle=0;html=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="20" y="332" width="248" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="b2" value="&lt;b&gt;AI GENERATED CODE&lt;/b&gt;&lt;br/&gt;&lt;font style='font-size:10px;'&gt;CDS views, BDEF, handlers — all AI&lt;/font&gt;" style="rounded=1;fillColor=#ede9fe;strokeColor=#7c3aed;fontColor=#4c1d95;fontSize=12;fontStyle=0;html=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="308" y="332" width="248" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="b3" value="&lt;b&gt;ZERO FINDINGS GATE&lt;/b&gt;&lt;br/&gt;&lt;font style='font-size:10px;'&gt;ATC blocks deploy if issues found&lt;/font&gt;" style="rounded=1;fillColor=#f1f5f9;strokeColor=#475569;fontColor=#1e293b;fontSize=12;fontStyle=0;html=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="596" y="332" width="248" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="b4" value="&lt;b&gt;CUSTOM ATC CHECKS&lt;/b&gt;&lt;br/&gt;&lt;font style='font-size:10px;'&gt;IF_ATC_CHECK → custom quality rules&lt;/font&gt;" style="rounded=1;fillColor=#ccfbf1;strokeColor=#0d9488;fontColor=#134e4a;fontSize=12;fontStyle=0;html=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="884" y="332" width="248" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="b5" value="&lt;b&gt;CLOUD NATIVE BTP&lt;/b&gt;&lt;br/&gt;&lt;font style='font-size:10px;'&gt;Managed ABAP env, OData V4, Fiori&lt;/font&gt;" style="rounded=1;fillColor=#dbeafe;strokeColor=#1d4ed8;fontColor=#1e3a8a;fontSize=12;fontStyle=0;html=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="1172" y="332" width="248" height="48" as="geometry" />
+        </mxCell>
+
+        <!-- TAGLINE (y=388) -->
+        <mxCell id="tg" value="GENERATE CODE  ·  ACTIVATE FAST  ·  DEPLOY SMART  ·  GO LIVE" style="text;html=1;fillColor=none;strokeColor=none;fontColor=#0f172a;fontSize=14;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="0" y="388" width="1440" height="22" as="geometry" />
+        </mxCell>
+
+        <!-- HASHTAGS (y=414) -->
+        <mxCell id="ht" value="#SAP  #ABAP  #RAP  #CDS  #Fiori  #BTP  #ClaudeCode  #ATC  #GitHubActions  #OneClickDeploy  #abapGit  #ODataV4" style="text;html=1;fillColor=none;strokeColor=none;fontColor=#94a3b8;fontSize=10;align=center;" vertex="1" parent="1">
+          <mxGeometry x="0" y="414" width="1440" height="16" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

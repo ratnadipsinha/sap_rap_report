@@ -1,0 +1,13 @@
+@EndUserText.label: 'Sales Cycle Report - Service Definition'
+
+define service ZXX_UI_SalesReport_O4 {
+
+  expose ZXX_C_SalesReport as SalesReport;
+
+  // Value help exposures
+  expose I_CompanyCode            as CompanyCode;
+  expose I_SalesOrganization      as SalesOrganization;
+  expose I_DistributionChannelText as DistributionChannel;
+  expose I_Currency               as Currency;
+
+}
