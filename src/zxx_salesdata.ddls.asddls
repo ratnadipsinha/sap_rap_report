@@ -12,9 +12,9 @@ define table zxx_salesdata {
   dist_channel      : abap.char(2);
   creation_date     : abap.dats;
   status            : abap.char(2);
-  currency          : abap.cuky;
-  order_value       : abap.curr(16,2);
-  invoice_value     : abap.curr(16,2);
+  currency          : abap.char(5);
+  order_value       : abap.dec(23,2);
+  invoice_value     : abap.dec(23,2);
   invoice_cnt       : abap.int4;
   delivery_cnt      : abap.int4;
   fulfil_pct        : abap.dec(5,2);
