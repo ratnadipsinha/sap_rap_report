@@ -4,9 +4,9 @@
 @Analytics.dataCategory: #DIMENSION
 
 define view entity ZXX_I_BillingSummary
-  as select from I_BillingDocumentItem
+  as select from I_SalesOrderItem
 {
-  key SalesDocument                           as SalesOrder,
+  key SalesOrder                              as SalesOrder,
   key TransactionCurrency                     as Currency,
 
       @DefaultAggregation: #SUM
@@ -14,8 +14,8 @@ define view entity ZXX_I_BillingSummary
       sum( NetAmount )                        as InvoiceValueNet,
 
       @DefaultAggregation: #COUNT_DISTINCT
-      count( distinct BillingDocument )       as InvoiceCount
+      count( distinct SalesOrderItem )        as InvoiceCount
 }
 group by
-  SalesDocument,
+  SalesOrder,
   TransactionCurrency

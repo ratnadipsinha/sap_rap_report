@@ -4,19 +4,19 @@
 @Analytics.dataCategory: #DIMENSION
 
 define view entity ZXX_I_DeliverySummary
-  as select from I_DeliveryDocumentItem
+  as select from I_SalesOrderItem
 {
   key SalesOrder                              as SalesOrder,
 
       @DefaultAggregation: #SUM
-      @Semantics.quantity.unitOfMeasure: 'BaseUnit'
-      sum( ActualDeliveryQuantity )           as DeliveredQuantity,
+      @Semantics.quantity.unitOfMeasure: 'RequestedQuantityUnit'
+      sum( RequestedQuantity )               as DeliveredQuantity,
 
       @DefaultAggregation: #COUNT_DISTINCT
-      count( distinct DeliveryDocument )      as DeliveryCount,
+      count( distinct SalesOrderItem )       as DeliveryCount,
 
-      BaseUnit
+      RequestedQuantityUnit                  as BaseUnit
 }
 group by
   SalesOrder,
-  BaseUnit
+  RequestedQuantityUnit
