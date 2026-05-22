@@ -1,28 +1,22 @@
-// Read-only Behavior Definition — Sales Cycle Report
-// No create / update / delete — this is an analytical report
-
 managed;
 strict ( 2 );
 
 define behavior for ZXX_I_SalesReport
 {
-  // Read-only — no CUD operations
-  // ALP queries are handled by the analytical_query provider contract in projection
-
-  mapping for ZXX_I_SalesReport
+  mapping for zxx_salesdata
   {
-    CompanyCode          = CompanyCode;
-    SalesOrganization    = SalesOrganization;
-    DistributionChannel  = DistributionChannel;
-    SalesOrder           = SalesOrder;
-    CreationDate         = CreationDate;
-    SalesOrderDate       = SalesOrderDate;
-    OverallStatus        = OverallStatus;
-    Currency             = Currency;
-    OrderValueNet        = OrderValueNet;
-    SalesOrderCount      = SalesOrderCount;
-    InvoiceValueNet      = InvoiceValueNet;
-    FulfilmentPercent    = FulfilmentPercent;
-    BillingPercent       = BillingPercent;
+    SalesOrder          = sales_order;
+    SalesOrganization   = sales_org;
+    CompanyCode         = company_code;
+    DistributionChannel = dist_channel;
+    CreationDate        = creation_date;
+    OverallStatus       = status;
+    Currency            = currency;
+    OrderValueNet       = order_value;
+    InvoiceValueNet     = invoice_value;
+    InvoiceCount        = invoice_cnt;
+    DeliveryCount       = delivery_cnt;
+    FulfilmentPercent   = fulfil_pct;
+    BillingPercent      = billing_pct;
   }
 }
