@@ -2,7 +2,6 @@
 @EndUserText.label: 'Sales Cycle Report - Interface View'
 @Analytics.dataCategory: #CUBE
 @AbapCatalog.viewEnhancementCategory: [#NONE]
-@AbapCatalog.compiler.compareFilter: true
 @AbapCatalog.sqlViewAppendName: 'ZXX_I_SLRPT'
 
 define root view entity ZXX_I_SalesReport
