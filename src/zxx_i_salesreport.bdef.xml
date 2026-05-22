@@ -6,6 +6,10 @@
     <BDEFNAME>ZXX_I_SALESREPORT</BDEFNAME>
     <DDLANGUAGE>E</DDLANGUAGE>
     <DDTEXT>Sales Cycle Report - Behavior Definition</DDTEXT>
+    <DDLOGSYS/>
+    <KORRNUM/>
+    <AS4LOCAL>A</AS4LOCAL>
+    <AS4VERS>0000</AS4VERS>
    </BDEF>
   </asx:values>
  </asx:abap>
