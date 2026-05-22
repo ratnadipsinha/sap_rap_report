@@ -113,6 +113,12 @@ skills:
     step:   4
     invoke: "/sap-clean-core"
 
+  - name:   "SAP-BTP-TRIAL-TEMPLATE"
+    file:   "Skills/SAP-BTP-TRIAL-TEMPLATE.md"
+    step:   5
+    invoke: "/sap-btp-trial-template"
+    note:   "Load before generating code for BTP trial — avoids all known abapGit pull errors"
+
 # ───────────────────────────────────────────────────────────────
 # FOLDER STRUCTURE
 # ───────────────────────────────────────────────────────────────
