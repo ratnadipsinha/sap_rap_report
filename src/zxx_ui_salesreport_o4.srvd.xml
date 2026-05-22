@@ -2,11 +2,11 @@
 <abapGit version="v1.0.0" serializer="LCL_OBJECT_SRVD" serializer_version="v1.0.0">
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
-   <SRVD>
+   <DATA>
     <SRVDNAME>ZXX_UI_SALESREPORT_O4</SRVDNAME>
     <DDLANGUAGE>E</DDLANGUAGE>
     <DDTEXT>Sales Cycle Report - Service Definition</DDTEXT>
-   </SRVD>
+   </DATA>
   </asx:values>
  </asx:abap>
 </abapGit>
