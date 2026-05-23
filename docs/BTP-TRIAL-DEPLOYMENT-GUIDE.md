@@ -42,7 +42,36 @@ Tested and verified on BTP ABAP Trial — AP21 region.
 
 ---
 
-## STEP 3 — ABAPGIT CLONE FROM GITHUB
+## STEP 3 — GITHUB PERSONAL ACCESS TOKEN
+
+> GitHub does not accept passwords. You must use a Personal Access Token (PAT).
+
+### Create the Token
+1. Go to **github.com** → sign in
+2. Profile picture (top right) → **Settings**
+3. Left sidebar (bottom) → **Developer settings**
+4. **Personal access tokens** → **Tokens (classic)**
+5. **Generate new token (classic)**
+   - Note: `abapGit Eclipse`
+   - Expiration: `90 days`
+   - Scope: tick **`repo`** (top checkbox)
+6. Click **Generate token** → **copy the token** (starts with `ghp_...`)
+
+> You will not see the token again after leaving the page.
+
+### Use Token in Eclipse abapGit
+When prompted for credentials:
+- **Username:** `ratnadipsinha`
+- **Password:** paste the `ghp_...` token
+
+### If Credentials Are Already Saved and Failing
+1. Eclipse → **Window → Preferences → General → Security → Secure Storage**
+2. Find the GitHub entry → **Delete**
+3. Retry the abapGit operation — it will re-prompt for credentials
+
+---
+
+## STEP 4 — ABAPGIT CLONE FROM GITHUB
 
 1. **Window → Show View → Other → abapGit Repositories**
 2. Click **+** (Clone)
@@ -62,7 +91,7 @@ Tested and verified on BTP ABAP Trial — AP21 region.
 
 ---
 
-## STEP 4 — ACTIVATE OBJECTS (EXACT ORDER)
+## STEP 5 — ACTIVATE OBJECTS (EXACT ORDER)
 
 1. `ZXX_SALESDATA` → Activate (`Ctrl+F3`)
 2. `ZXX_I_SALESREPORT` → Activate
@@ -72,7 +101,7 @@ Tested and verified on BTP ABAP Trial — AP21 region.
 
 ---
 
-## STEP 5 — CREATE BDEF MANUALLY
+## STEP 6 — CREATE BDEF MANUALLY
 
 > abapGit cannot import BDEF — always create manually in Eclipse
 
@@ -109,7 +138,7 @@ define behavior for ZXX_I_SalesReport
 
 ---
 
-## STEP 6 — CREATE SERVICE DEFINITION MANUALLY
+## STEP 7 — CREATE SERVICE DEFINITION MANUALLY
 
 > abapGit cannot import SRVD — always create manually in Eclipse
 
@@ -129,7 +158,7 @@ define service ZXX_UI_SalesReport_O4 {
 
 ---
 
-## STEP 7 — CREATE SERVICE BINDING
+## STEP 8 — CREATE SERVICE BINDING
 
 1. Right-click `ZXX_REPORTS` → **New → Other → ABAP → Service Binding**
 2. Fill in:
@@ -141,7 +170,7 @@ define service ZXX_UI_SalesReport_O4 {
 
 ---
 
-## STEP 8 — ADD TEST DATA
+## STEP 9 — ADD TEST DATA
 
 1. Right-click `ZXX_REPORTS` → **New → ABAP Class**
    - Name: `ZXX_CL_INSERT_TESTDATA`
