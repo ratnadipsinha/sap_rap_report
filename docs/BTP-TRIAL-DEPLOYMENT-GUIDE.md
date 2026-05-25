@@ -11,6 +11,10 @@ Tested and verified on BTP ABAP Trial — AP21 region.
 - **BAS URL:** `https://bae48832trial.ap21cf.trial.applicationstudio.cloud.sap`
 - **Package:** `ZXX_REPORTS`
 - **GitHub Repo:** `https://github.com/ratnadipsinha/SAP_RAP_REPORT.git`
+- **OData V4 Service Path:** `/sap/opu/odata4/sap/zxx_ui_salesreport_o4/srvd/sap/zxx_ui_salesreport_o4/0001/`
+- **Full OData URL:** `https://a396c05d-a792-494b-a9f2-5b3f674def78.abap-web.ap21.hana.ondemand.com/sap/opu/odata4/sap/zxx_ui_salesreport_o4/srvd/sap/zxx_ui_salesreport_o4/0001/`
+- **Entity Set:** `SalesReport`
+- **Metadata:** `<Full OData URL>/$metadata`
 
 ---
 
